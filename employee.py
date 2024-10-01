@@ -1,24 +1,43 @@
 """Employee Module"""
 
 
-class SalaryEmployee:
-    """Class to represent a single salary employee"""
+class Employee:
+    """Class to represent a single base employee"""
 
     WEEKS_PER_YEAR = 52
 
-    def __init__(self, first_name, last_name, weekly_salary):
+    def __init__(self, first_name, last_name):
         """Constructor"""
         self.first_name = first_name
         self.last_name = last_name
-        self.weekly_salary = weekly_salary
 
     def __str__(self):
-        """String method"""
-        return f"{self.first_name:<10} {self.last_name:<20} {self.formatted_weekly_salary:>14}"
+        """String Method"""
+        return f"{self.first_name:<10} {self.last_name:<20}"
 
     def first_and_last_name(self):
         """Return first and last name concatenated together"""
         return f"{self.first_name:<10} {self.last_name:<20}"
+
+        # NOTE: Can't do the following if planning to call this
+        # first_and_last name method from outside classes.
+        # Comment out the above and uncomment the below, then
+        # also call this method from somewhere else to see it fail.
+
+        # return self.__str__()
+
+
+class SalaryEmployee(Employee):
+    """Class to represent a single salary employee"""
+
+    def __init__(self, first_name, last_name, weekly_salary):
+        """Constructor"""
+        super().__init__(first_name, last_name)
+        self.weekly_salary = weekly_salary
+
+    def __str__(self):
+        """String method"""
+        return f"{super().__str__()} {self.formatted_weekly_salary:>14}"
 
     @property
     def formatted_weekly_salary(self):
@@ -40,21 +59,18 @@ class SalaryEmployee:
         self.weekly_salary = self.weekly_salary * (1 + (percentage / 100))
 
 
-class HourlyEmployee:
+class HourlyEmployee(Employee):
     """Class to represent a single hourly employee"""
-
-    WEEKS_PER_YEAR = 52
 
     def __init__(self, first_name, last_name, hourly_rate, hours_per_week):
         """Constructor"""
-        self.first_name = first_name
-        self.last_name = last_name
+        super().__init__(first_name, last_name)
         self.hourly_rate = hourly_rate
         self.hours_per_week = hours_per_week
 
     def __str__(self):
         """String method"""
-        return f"{self.first_name:<10} {self.last_name:<20} {self.formatted_weekly_salary:>14}"
+        return f"{super().__str__()} {self.formatted_weekly_salary:>14}"
 
     def first_and_last_name(self):
         """Return first and last name concatenated together"""
@@ -63,7 +79,7 @@ class HourlyEmployee:
     @property
     def weekly_salary(self):
         """Return first and last name concatenated together"""
-        return f"{self.first_name:<10} {self.last_name:<20}"
+        return self.hourly_rate * self.hours_per_week
 
     @property
     def formatted_weekly_salary(self):
