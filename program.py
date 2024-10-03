@@ -11,6 +11,13 @@ from user_interface import UserInterface
 def main(*args):
     """Method to run program"""
 
+    # NOTE: Use the next line to show how it is not possible
+    # to make instances of an abstract class
+    # If there are no abstract methods in the abstract
+    # class, you can technically still make instances.
+    # my_employee = Employee("D", "B")
+    # print(my_employee)
+
     # Make a new instance of the UserInterface class
     ui = UserInterface()
 

@@ -1,7 +1,11 @@
 """Employee Module"""
 
+from abc import ABC, abstractmethod
 
-class Employee:
+# from typing import override
+
+
+class Employee(ABC):
     """Class to represent a single base employee"""
 
     WEEKS_PER_YEAR = 52
@@ -23,8 +27,42 @@ class Employee:
         # first_and_last name method from outside classes.
         # Comment out the above and uncomment the below, then
         # also call this method from somewhere else to see it fail.
-
         # return self.__str__()
+
+    # Made this property abstract because we want all sub-classes
+    # to implement it. But, we don't know how. So, we can leave the
+    # details to the sub-class.
+    @property
+    @abstractmethod
+    def formatted_weekly_salary(self):
+        """Property for weekly salary formatted as currency"""
+        raise NotImplementedError()
+
+    # Made this property abstract because we want all sub-classes
+    # to implement it. But, we don't know how. So, we can leave the
+    # details to the sub-class.
+    @property
+    @abstractmethod
+    def yearly_salary(self):
+        """Property for yearly salary"""
+        raise NotImplementedError()
+
+    # Made this property abstract because we want all sub-classes
+    # to implement it. But, we don't know how. So, we can leave the
+    # details to the sub-class.
+    @property
+    @abstractmethod
+    def formatted_yearly_salary(self):
+        """Property for yearly salary formatted as currency"""
+        raise NotImplementedError()
+
+    # Made this method abstract because we want all sub-classes
+    # to implement it. But, we don't know how. So, we can leave the
+    # details to the sub-class.
+    @abstractmethod
+    def apply_percentage_raise(self, percentage):
+        """Accept a percentage raise and apply it to the pay rate"""
+        raise NotImplementedError()
 
 
 class SalaryEmployee(Employee):
