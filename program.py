@@ -3,6 +3,9 @@
 # System Imports
 import os
 
+# Third-party imports
+from filters.person_filter import PersonFilter
+
 # First-Party imports
 from employee import Employee, SalaryEmployee, HourlyEmployee
 from user_interface import UserInterface
@@ -42,6 +45,26 @@ def main(*args):
 
             # Convert each employee to a string and add it to the outputstring
             for employee in employees:
+                # Concatenate to the output_string
+                output_string += f"{employee}{os.linesep}"
+
+            # Use the UI class to print out the string
+            ui.print_list(output_string)
+
+        # See if the input they sent is equal to 2.
+        if selection == 2:
+            # Create Person Filter
+            person_filter = PersonFilter()
+            filtered_employees = person_filter.filter_by_first_name(
+                employees,
+                "David",
+            )
+
+            # Create string for concatenation
+            output_string = ""
+
+            # Convert each employee to a string and add it to output_string
+            for employee in filtered_employees:
                 # Concatenate to the output_string
                 output_string += f"{employee}{os.linesep}"
 

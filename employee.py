@@ -1,23 +1,43 @@
 """Employee Module"""
 
+# System imports
 from abc import ABC, abstractmethod
+
+# Third-Party imports
+from filters.person_filter import Person
 
 # from typing import override
 
 
-class Employee(ABC):
+class Employee(Person, ABC):
     """Class to represent a single base employee"""
 
     WEEKS_PER_YEAR = 52
 
     def __init__(self, first_name, last_name):
         """Constructor"""
-        self.first_name = first_name
-        self.last_name = last_name
+        self._first_name = first_name
+        self._last_name = last_name
+        self._age = None
 
     def __str__(self):
         """String Method"""
         return f"{self.first_name:<10} {self.last_name:<20} {self.formatted_weekly_salary:>14}"
+
+    @property
+    def first_name(self):
+        """First Name Property"""
+        return self._first_name
+
+    @property
+    def last_name(self):
+        """Last Name Property"""
+        return self._last_name
+
+    @property
+    def age(self):
+        """Age Property"""
+        return self._age
 
         # NOTE: Can't do the following if planning to call this
         # first_and_last_name method from outside classes.
